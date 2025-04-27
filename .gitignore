@@ -172,3 +172,6 @@ sphinx_*/
 # Android ABI build files
 abi_gki_protected_exports
 all_kmi_symbols
+
+# s5e9945 specific
+arch/arm64/configs/erd9945_u_gki_defconfig
