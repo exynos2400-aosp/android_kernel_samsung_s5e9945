@@ -207,6 +207,9 @@ scmd_eh_abort_handler(struct work_struct *work)
 			scmd_printk(KERN_WARNING, scmd,
 				    "finish aborted command\n"));
 		scsi_finish_command(scmd);
+#if defined(CONFIG_SEC_FACTORY) && defined(CONFIG_USB_DEBUG_DETAILED_LOG)
+		pr_info("%s finish command\n", __func__);
+#endif
 	}
 	return;
 
@@ -1816,7 +1819,10 @@ check_type:
 	 * assume caller has checked sense and determined
 	 * the check condition was retryable.
 	 */
-	if (req->cmd_flags & REQ_FAILFAST_DEV || blk_rq_is_passthrough(req))
+	if (req->cmd_flags & REQ_FAILFAST_DEV)
+		return true;
+	if (blk_rq_is_passthrough(req) &&
+	    !(scmd->flags & SCMD_RETRY_PASSTHROUGH))
 		return true;
 
 	return false;
