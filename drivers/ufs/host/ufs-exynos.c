@@ -3580,4 +3580,3 @@ module_platform_driver(exynos_ufs_driver);
 MODULE_DESCRIPTION("Exynos Specific UFSHCI driver");
 MODULE_AUTHOR("Seungwon Jeon <tgih.jun@samsung.com>");
 MODULE_AUTHOR("Kiwoong Kim <kwmad.kim@samsung.com>");
-MODULE_LICENSE("GPL");

@@ -972,9 +972,9 @@ void binder_alloc_deferred_release(struct binder_alloc *alloc)
 			__free_page(alloc->pages[i].page_ptr);
 			page_count++;
 		}
-		kfree(alloc->pages);
 	}
 	binder_alloc_unlock(alloc);
+	kfree(alloc->pages);
 	if (alloc->mm)
 		mmdrop(alloc->mm);
 
@@ -1332,4 +1332,4 @@ int binder_alloc_copy_from_buffer(struct binder_alloc *alloc,
 	return binder_alloc_do_buffer_copy(alloc, false, buffer, buffer_offset,
 					   dest, bytes);
 }
-
+EXPORT_SYMBOL_GPL(binder_alloc_copy_from_buffer);
